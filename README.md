@@ -23,7 +23,7 @@ Regions: *NorthEurope, CentralUS, JapanEast, AustraliaEast, CanadaCentral*
 3. Run:
 
 ```PowerShell
-.\Provision.ps1 -TenantId "id of your tenant" -GlobalAdminUserName "admin@yourtenant.onmicrosoft.com" -Region "One above region"
+.\Provision.ps1 -TenantId "id of your tenant" -GlobalAdminUserName "admin@yourtenant.onmicrosoft.com" -Region "One from above regions"
 ```
 
 4. After script is done you will see the url the following format:

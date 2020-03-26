@@ -12,4 +12,4 @@ $AzureResources = @{
 . "$PSScriptRoot\Set-LMS365DelegatedPermission.ps1"
 . "$PSScriptRoot\Get-LMS365TenantProvisionUrl"
 . "$PSScriptRoot\Vars.Production.ps1"
-
+. "$PSScriptRoot\Set-LMS365QAVars.ps1"
