@@ -7,7 +7,9 @@ function Install-LMS365App {
     )
     
     Write-Verbose "Install LMS365"
+    Clear-AdTokenCache
     try{
+
         Get-AdToken -TenantId $TenantId -ResourceId $AzureResources.GraphAPI -ClientId $AzureResources.LMS365 -UserName $UserName | Out-Null
     }
     catch{

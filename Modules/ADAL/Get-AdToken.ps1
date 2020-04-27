@@ -1,3 +1,4 @@
+[Microsoft.IdentityModel.Clients.ActiveDirectory.TokenCache] $TokenCache = New-Object Microsoft.IdentityModel.Clients.ActiveDirectory.TokenCache
 
 function Get-ADToken {
     param (
@@ -10,8 +11,10 @@ function Get-ADToken {
         [Parameter(Mandatory = $true)]
         [string] $UserName
     )
+    
+    
 
-    $authContext = [Microsoft.IdentityModel.Clients.ActiveDirectory.AuthenticationContext]::new("$LoginEndPoint/$TenantId")
+    $authContext = [Microsoft.IdentityModel.Clients.ActiveDirectory.AuthenticationContext]::new("$LoginEndPoint/$TenantId", $TokenCache)
     $result = $authContext.AcquireTokenAsync($ResourceId, `
                                     $ClientId, `
                                     [System.Uri]::new("urn:ietf:wg:oauth:2.0:oob"), `
@@ -21,3 +24,6 @@ function Get-ADToken {
     return $result.AccessToken
 }
 
+function Clear-AdTokenCache {
+    $TokenCache.Clear()
+}

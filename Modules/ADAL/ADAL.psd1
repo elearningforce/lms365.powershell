@@ -25,7 +25,8 @@
     )
     # Functions to export from this module
     FunctionsToExport      = @(
-        'Get-ADToken'
+        'Get-ADToken',
+        'Clear-AdTokenCache'
     )
     # Cmdlets to export from this module
     CmdletsToExport        = @()

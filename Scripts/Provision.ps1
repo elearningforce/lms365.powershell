@@ -10,23 +10,9 @@
  
 # The second goal(Reduce permissions) is achieved using AzureAD PS module(which utilizes GraphAPI and AzureADPreview module). The script modifies delegated and application permissions of LMS365
 
-param(
-    # Id of target tenant.
-    [Parameter(Mandatory =$true)]
-    [guid]
-    $TenantId,
-    # User who has Global admin or application administrator role.
-    [Parameter(Mandatory = $true)]
-    [string]
-    $GlobalAdminUserName,
-    # Geo region where LMS365 infrastructure will be deployed.
-    [Parameter(Mandatory = $true)]
-    [ValidateSet("NorthEurope", "CentralUS", "JapanEast", "AustraliaEast", "CanadaCentral")]
-    [string]
-    $Region
-)
-
-$tId = $TenantId.ToString()
+$TenantId = "[YOUR TENANT ID]"
+$GlobalAdminUserName ="[GLOBAL ADMIN USER NAME]"
+$Region = "NorthEurope"  #"NorthEurope", "CentralUS", "JapanEast", "AustraliaEast", "CanadaCentral"
 
 $ErrorActionPreference = "Stop"
 
@@ -43,25 +29,25 @@ Install-AzureADModule
 
 Write-Verbose "Connect to AzureAD" -Verbose
 # Connects to AzureAD, which will show browser dialog for authentication.
-Connect-AzureAD -TenantId $tId -AccountId $GlobalAdminUserName
+Connect-AzureAD -TenantId $TenantId -AccountId $GlobalAdminUserName
 
 Write-Verbose "Install LMS365 Azure AD Applications" -Verbose
 # Requests token to GraphAPI via LMS365 app. It will show browser dialog with admin_consent. 
 # During this process, NO auth tokens(refresh_token, id_token, access_tokens) will be passed to our backend because redirect uri is `urn:ietf:wg:oauth:2.0:oob`.
-Install-LMS365App -TenantId $tId -UserName $GlobalAdminUserName
+Install-LMS365App -TenantId $TenantId -UserName $GlobalAdminUserName
 
 Write-Verbose "Reduce LMS365 permissions to SharePoint" -Verbose
 
 # Update delegated permissions of LMS365 app using PATCH https://graph.microsoft.com/beta/oAuth2Permissiongrants/.
-Set-LMS365DelegatedPermission -TenantId $tId -UserName $GlobalAdminUserName -Resource "SharePoint" -DesiredScopes "MyFiles.Read"
-Set-LMS365DelegatedPermission -TenantId $tId -UserName $GlobalAdminUserName -Resource "GraphAPI" -DesiredScopes "User.Invite.All,RoleManagement.Read.Directory,User.Read.All"
+Set-LMS365DelegatedPermission -TenantId $TenantId -UserName $GlobalAdminUserName -Resource "SharePoint" -DesiredScopes "MyFiles.Read"
+Set-LMS365DelegatedPermission -TenantId $TenantId -UserName $GlobalAdminUserName -Resource "GraphAPI" -DesiredScopes "User.Invite.All,RoleManagement.Read.Directory,User.Read.All"
 
 # Remove application permissions of LMS365 using AzureAD PS Module function Remove-AzureADServiceAppRoleAssignment.
-Remove-LMS365ApplicationPermission -TenantId $tId -UserName $GlobalAdminUserName -Resource "GraphAPI" -ScopeToDelete "Directory.Read.All"
-Add-LMS365ApplicationPermission -TenantId $tId -UserName $GlobalAdminUserName -Resource "GraphAPI" -ScopeToAdd "GroupMember.Read.All"
+Remove-LMS365ApplicationPermission -Resource "GraphAPI" -ScopeToDelete "Directory.Read.All"
+Add-LMS365ApplicationPermission -TenantId $TenantId -UserName $GlobalAdminUserName -Resource "GraphAPI" -ScopeToAdd "GroupMember.Read.All"
 
 # Just combine lms365 url for further installation.
-$provsionUrl = Get-LMS365TenantProvisionUrl -TenantId $tId -Region $Region
+$provsionUrl = Get-LMS365TenantProvisionUrl -TenantId $TenantId -Region $Region
 Write-Host "Please proceed installation process manually under regular user(not global admin):" -ForegroundColor Green
 Write-Host $provsionUrl -ForegroundColor Green
 
