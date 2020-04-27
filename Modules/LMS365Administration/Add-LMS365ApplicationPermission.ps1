@@ -48,3 +48,29 @@ function Add-LMS365ApplicationPermission {
         -Body $( $body | ConvertTo-Json)
 }
 
+
+function Get-LMS365ApplicationPermission {
+        [CmdletBinding()]
+        param (
+            [Parameter(Mandatory = $true)]
+            [ValidateSet("SharePoint", "GraphAPI")]
+            [string] $Resource
+        )
+    
+        switch ($Resource) {
+            "SharePoint" { $appId = $AzureResources.SharePoint }
+            "GraphAPI" { $appId = $AzureResources.GraphAPI }
+            default { }
+        }
+        $lms365App = Get-LMS365AppServicePrincipal
+        $resourceApp = Get-ServicePrincipalByAppId -AppId $appId
+    
+        $appRoleIdToAdd = $resourceApp.AppRoles | Select-Object -ExpandProperty Id
+        if (-not $appRoleIdToAdd) {
+            throw "Permission scope $ScopeToDelete cannot be found in $Resource app roles."
+        }
+        # Get all application permissions for the service principal
+        Get-AzureADServiceAppRoleAssignedTo -ObjectId $lms365App.ObjectId -All $true `
+                                        | Where-Object { $_.PrincipalType -eq "ServicePrincipal" -and $_.ResourceId -eq $resourceApp.ObjectId } `
+                                        
+}
