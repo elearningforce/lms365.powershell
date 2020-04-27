@@ -1,14 +1,14 @@
 # There are two Main goals of this script:
-# 1. Install LMS365 Azure AD applications as Azure AD Enterprice Application
-# 2. Reduce permisssions of LMS365 AAD application to minimun set as possible
-
-
-# To Install LMS365 Azure AD applications as Azure AD Enterprice Application we use admin_consent request, therefor after global administator's approval our appears as Enterprice Applications in customer tenant
+# 1. Install LMS365 Azure AD applications as Azure AD Enterprise Application
+# 2. Reduce permissions of LMS365 AAD application to minimum set as possible
+ 
+ 
+# To Install LMS365 Azure AD applications as Azure AD Enterprise Application we use admin_consent request, therefor after global administrator's approval our apps appears as Enterprise Applications in customer tenant
 # admin_consent flow runs by requesting GraphAPI token using LMS365 application as client_id. The request is configured by .NET ADAL library. 
-# we use urn:ietf:wg:oauth:2.0:oob as redirect uri, it garantee that no tokens will be send to our backend but all tokens will be recieved locally.
-# after admin_consent has been accepted the script waits till Enterprice Applications are fully provisioned and accessable via AzureAD module
-
-# The second goal is achived using AzureAD PS module(which utilize GraphAPI). The script modify delegated and application permissions of LMS365
+# We use urn:ietf:wg:oauth:2.0:oob as a redirect uri, it guarantees that no tokens will be sent to our backend but all tokens will be received locally.
+# after admin_consent has been accepted the script waits till Enterprise Applications are fully provisioned and accessible via AzureAD module
+ 
+# The second goal(Reduce permissions) is achieved using AzureAD PS module(which utilizes GraphAPI and AzureADPreview module). The script modifies delegated and application permissions of LMS365
 
 param(
     # Id of target tenant.
@@ -60,7 +60,7 @@ Set-LMS365DelegatedPermission -TenantId $tId -UserName $GlobalAdminUserName -Res
 Remove-LMS365ApplicationPermission -TenantId $tId -UserName $GlobalAdminUserName -Resource "GraphAPI" -ScopeToDelete "Directory.Read.All"
 Add-LMS365ApplicationPermission -TenantId $tId -UserName $GlobalAdminUserName -Resource "GraphAPI" -ScopeToAdd "GroupMember.Read.All"
 
-# Just combine lms365 url for futher installation.
+# Just combine lms365 url for further installation.
 $provsionUrl = Get-LMS365TenantProvisionUrl -TenantId $tId -Region $Region
 Write-Host "Please proceed installation process manually under regular user(not global admin):" -ForegroundColor Green
 Write-Host $provsionUrl -ForegroundColor Green

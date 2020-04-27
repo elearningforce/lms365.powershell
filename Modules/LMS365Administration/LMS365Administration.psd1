@@ -73,9 +73,7 @@
         'Remove-LMS365ApplicationPermission',
         'Set-LMS365DelegatedPermission',
         'Get-LMS365TenantProvisionUrl',
-        'Set-LMS365QAVars',
-        'Get-LMS365AppServicePrincipal',
-        'Get-LMS365ApplicationPermission'
+        'Set-LMS365QAVars'
     )
     
     # Cmdlets to export from this module
