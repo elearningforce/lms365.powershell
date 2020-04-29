@@ -1,4 +1,4 @@
-# How to install LMS365 manually (with high security demands) #
+# How to install LMS365 manually with reduced permissions #
 
 The process divides on two stages:
 
