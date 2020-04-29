@@ -40,7 +40,8 @@ Write-Verbose "Reduce LMS365 permissions to SharePoint" -Verbose
 
 # Update delegated permissions of LMS365 app using PATCH https://graph.microsoft.com/beta/oAuth2Permissiongrants/.
 Set-LMS365DelegatedPermission -TenantId $TenantId -UserName $GlobalAdminUserName -Resource "SharePoint" -DesiredScopes "MyFiles.Read"
-Set-LMS365DelegatedPermission -TenantId $TenantId -UserName $GlobalAdminUserName -Resource "GraphAPI" -DesiredScopes "User.Invite.All RoleManagement.Read.Directory User.Read.All"
+#Set-LMS365DelegatedPermission -TenantId $TenantId -UserName $GlobalAdminUserName -Resource "GraphAPI" -DesiredScopes "User.Invite.All RoleManagement.Read.Directory User.Read.All"
+Set-LMS365DelegatedPermission -TenantId $TenantId -UserName $GlobalAdminUserName -Resource "GraphAPI" -DesiredScopes "User.Read.All"
 
 # Remove application permissions of LMS365 using AzureAD PS Module function Remove-AzureADServiceAppRoleAssignment.
 Remove-LMS365ApplicationPermission -Resource "GraphAPI" -ScopeToDelete "Directory.Read.All"
