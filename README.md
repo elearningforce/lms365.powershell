@@ -12,7 +12,7 @@ Regions: *NorthEurope, CentralUS, JapanEast, AustraliaEast, CanadaCentral*
 ### How to run provisioning ###
 
 1. Download or clone the repository.
-2. Open the file in PS editor `[repository dir]./Scripts/Provision.ps1` and modify the parameters
+2. Open `[repository dir]./Scripts/Provision.ps1` file in PS editor and modify the parameters
 
 ```PowerShell
 $TenantId = "GUID represents id of your tenant"
