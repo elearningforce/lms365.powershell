@@ -3,7 +3,7 @@
 ### Prerequisites ###
 
 - PowerShell 5.0
-- Azure AD account who has at least application administrator permissions or global admin.
+- Azure AD global admin account i.e. the user who allowed to accept consent.
 - Installed [AzureADPreview](https://www.powershellgallery.com/packages/AzureADPreview/2.0.2.85) PS module or Windows account who can run console as administrator
 - Understanding what is the LMS365 region suits for your data
 ![alt](https://i.imgur.com/VIKlWNW.png)
