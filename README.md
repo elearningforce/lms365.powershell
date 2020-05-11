@@ -1,10 +1,3 @@
-# How to install LMS365 manually with reduced permissions #
-
-The process divides on two stages:
-
-1. Provision LMS365 tenant
-2. Create and configure course catalog
-
 ## Provision LMS365 tenant ##
 
 ### Prerequisites ###
@@ -19,17 +12,14 @@ Regions: *NorthEurope, CentralUS, JapanEast, AustraliaEast, CanadaCentral*
 ### How to run provisioning ###
 
 1. Download or clone the repository.
-2. Open PowerShell console and cd `[repository dir]./Scripts` directory
-3. Run:
+2. Open the file in PS editor `[repository dir]./Scripts/Provision.ps1` and modify the parameters
 
 ```PowerShell
-.\Provision.ps1 -TenantId "id of your tenant" -GlobalAdminUserName "admin@yourtenant.onmicrosoft.com" -Region "One from above regions"
+$TenantId = "GUID represents id of your tenant"
+$GlobalAdminUserName ="admin@yourtenant.onmicrosoft.com"
+$Region = "CentralUS"  #"NorthEurope", "CentralUS", "JapanEast", "AustraliaEast", "CanadaCentral"
 ```
-
+3. Run the `[repository dir]./Scripts/Provision.ps1`
 4. After script is done you will see the url the following format:
 ![alt](https://i.imgur.com/D0xfhLo.png)
 this is url you can open to proceed installation under normal user(not admin)
-
-## Create and configure course catalog ##
-
-TODO

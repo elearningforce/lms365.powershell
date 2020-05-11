@@ -10,8 +10,8 @@
  
 # The second goal(Reduce permissions) is achieved using AzureAD PS module(which utilizes GraphAPI and AzureADPreview module). The script modifies delegated and application permissions of LMS365
 
-$TenantId = "f43b0299-3c54-4c2e-a647-11b6df2ae863"
-$GlobalAdminUserName ="admin@zimaprishla.onmicrosoft.com"
+$TenantId = "GUID represents id of your tenant"
+$GlobalAdminUserName ="admin@yourtenant.onmicrosoft.com"
 $Region = "NorthEurope"  #"NorthEurope", "CentralUS", "JapanEast", "AustraliaEast", "CanadaCentral"
 
 $ErrorActionPreference = "Stop"
@@ -40,7 +40,6 @@ Write-Verbose "Reduce LMS365 permissions to SharePoint" -Verbose
 
 # Update delegated permissions of LMS365 app using PATCH https://graph.microsoft.com/beta/oAuth2Permissiongrants/.
 Set-LMS365DelegatedPermission -TenantId $TenantId -UserName $GlobalAdminUserName -Resource "SharePoint" -DesiredScopes "MyFiles.Read"
-#Set-LMS365DelegatedPermission -TenantId $TenantId -UserName $GlobalAdminUserName -Resource "GraphAPI" -DesiredScopes "User.Invite.All RoleManagement.Read.Directory User.Read.All"
 Set-LMS365DelegatedPermission -TenantId $TenantId -UserName $GlobalAdminUserName -Resource "GraphAPI" -DesiredScopes "User.Read.All"
 
 # Remove application permissions of LMS365 using AzureAD PS Module function Remove-AzureADServiceAppRoleAssignment.
