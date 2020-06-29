@@ -43,7 +43,7 @@ NOTE: Above url should be used to proceed installation as the LMS business owner
 6. Open https://lms.365.systems in a new tab in the same browser session
 7. Press F12 top open the Browser Developer Tools and select the Console tab
 8. Enter 'createCatalogManually()' and press enter to launch the 'Add Course Catalog' dialog
-9. Paste the URL to the SharePoint Site Collection
+9. Paste the URL to the SharePoint Site Collection in the Site Url field
 10. Add any additional Catalog Adminstrators from your organization and click 'Save'
 11. Now the LMS365 Catalog, Dashboard pages should be created and you are ready to start creating your training
 
