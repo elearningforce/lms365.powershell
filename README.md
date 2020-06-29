@@ -29,19 +29,21 @@ NOTE: Above url should be used to proceed installation as the LMS business owner
 8. Provide the LMS Busines Owner the URL generated in step 4 above
 
 ### How to manually create & configure LMS365 Course Catalog ###
-1. Login as the LMS Business Owner to the SharePoint site collection
+1. Login as the LMS Business Owner and open the SharePoint site collection planed to host the LMS Course Catalog
 2. Register the LMS365 Permission App manually without uploading app package via https://{tenantdomain}.sharepoint.com/sites/{sitecollection}/_layouts/15/appinv.aspx
 3. Lookup the App details using ID: f0f74104-da78-4591-a616-9949e9836b40
 4. Paste the following into App Permission Request XML:
-  <AppPermissionRequests AllowAppOnlyPolicy="true">
-      <AppPermissionRequest Scope="http://sharepoint/content/sitecollection" Right="FullControl" />
-      <AppPermissionRequest Scope="http://sharepoint/content/sitecollection/web" Right="FullControl" />
-  </AppPermissionRequests>
+```
+    <AppPermissionRequests AllowAppOnlyPolicy="true">
+        <AppPermissionRequest Scope="http://sharepoint/content/sitecollection" Right="FullControl" />
+        <AppPermissionRequest Scope="http://sharepoint/content/sitecollection/web" Right="FullControl" />
+    </AppPermissionRequests>
+```  
 5. Click Create
 6. Open https://lms.365.systems in a new tab in the same browser session
 7. Press F12 top open the Browser Developer Tools and select the Console tab
-8. Enter 'createCatalogManually()' and press enter to open 'Add Course Catalog' dialog
-9. Paste the URL to the SharePoint Site Collection planed to host the LMS Course Catalog
+8. Enter 'createCatalogManually()' and press enter to launch the 'Add Course Catalog' dialog
+9. Paste the URL to the SharePoint Site Collection
 10. Add any additional Catalog Adminstrators from your organization and click 'Save'
 11. Now the LMS365 Catalog, Dashboard pages should be created and you are ready to start creating your training
 
