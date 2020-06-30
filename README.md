@@ -26,7 +26,7 @@ NOTE: Above url should be used to proceed installation as the LMS business owner
 5. Verify under Enterprise Applications that all [LMS365 applications are available](https://helpcenter.elearningforce.com/hc/en-us/articles/360004770257-LMS365-Azure-Active-Directory-architecture)
 6. [Manually download and install the LMS365 SPFX package into your Tenant](https://helpcenter.elearningforce.com/hc/en-us/articles/360001535949-How-to-manually-update-the-SPFX-package-for-your-Tenant)
 7. Prepare a Modern SharePoint Communication site collection and make the LMS Business Owner the [https://docs.microsoft.com/en-us/sharepoint/sites/change-site-collection-administrators#change-the-primary-or-secondary-site-collection-administrator](primary site collection administrator - Owner is not sufficient)
-8. Provide the LMS Bussines Owner the URL generated in step 4 above
+8. Provide the LMS Bussines Owner the URL generated in step 4 above and complete the provisioning of the LMS365 tenant database
 
 ### How to manually create & configure LMS365 Course Catalog ###
 1. Login as the LMS Business Owner and open the SharePoint site collection planed to host the LMS Course Catalog
