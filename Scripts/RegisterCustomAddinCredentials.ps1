@@ -5,7 +5,7 @@ param (
     [ValidateSet('https://ne-api-dev.365.systems', 'https://va-api.usgcc365.systems', 'https://ne-api-qa.365.systems')]
     [string] $LMS365ApiEndPoint,
     [ValidateSet('AzureCloud', 'USGovernment')]
-    [string] $AzureEnvironemnt
+    [string] $AzureEnvironment
 )
 $ErrorActionPreference = "Stop"
 
@@ -36,7 +36,7 @@ $servicePrincipalName = @("$clientID/$appDomain")
 
 
 Write-Verbose "Connecting: Please specify tenant admin account." -Verbose
-Connect-MsolService -AzureEnvironment $AzureEnvironemnt
+Connect-MsolService -AzureEnvironment $AzureEnvironment
 
 Write-Verbose "Connected: Registering access addin credentials with client id $clientID" -Verbose
 $parameters = @{
