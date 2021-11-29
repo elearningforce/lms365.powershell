@@ -1,13 +1,9 @@
 
-[CmdletBinding()]
-param (
-    [string] $LMS365TenantAPIKey,
-    [ValidateSet('https://ne-api-dev.365.systems', 'https://va-api.usgcc365.systems', 'https://ne-api-qa.365.systems')]
-    [string] $LMS365ApiEndPoint,
-    [ValidateSet('AzureCloud', 'USGovernment')]
-    [string] $AzureEnvironment
-)
 $ErrorActionPreference = "Stop"
+
+$LMS365TenantAPIKey = Read-Host -Prompt "Enter your API Key"
+$LMS365ApiEndPoint = "https://va-api.usgcc365.systems"
+$AzureEnvironment = "USGovernment"
 
 # https://docs.microsoft.com/en-us/powershell/module/msonline/?view=azureadps-1.0
 # The module is required to register SharePoint service principal
